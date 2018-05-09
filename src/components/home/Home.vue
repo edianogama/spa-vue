@@ -7,7 +7,8 @@
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto in filtroFoto">
         <meu-painel :titulo="foto.titulo">
-          <image-responsiva :url="foto.url" :titulo="foto.titulo"></image-responsiva>
+          <image-responsiva :url="foto.url" :titulo="foto.titulo"/>
+          <my-button rotulo="Excluir" tipo="button" :confirm="true"  estilo="danger" @confirmDialog="remove(foto)"></my-button>
         </meu-painel>
       </li>
     </ul>
@@ -17,11 +18,13 @@
 <script>
 import Painel from '../shared/painel/Painel.vue';
 import ImagemResponsiva from '../shared/imagem-responsiva/imagemResponsiva.vue'
+import Button from '../shared/button/Button.vue'
 
 export default {
   components: {
     'meu-painel': Painel,
-    'image-responsiva': ImagemResponsiva
+    'image-responsiva': ImagemResponsiva,
+    'my-button': Button
   },
   data() {
     return {
@@ -38,6 +41,11 @@ export default {
       }else{
         return this.fotos;
       }
+    }
+  },
+  methods: {
+    remove(foto){
+      alert('removido: ' + foto.titulo);
     }
   },
   created(){ 
